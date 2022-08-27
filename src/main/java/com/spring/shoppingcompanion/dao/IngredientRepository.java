@@ -11,4 +11,6 @@ import java.math.BigInteger;
 public interface IngredientRepository extends JpaRepository<IngredientDto, BigInteger>,
         JpaSpecificationExecutor<IngredientDto> {
 
+    public IngredientDto findByIngredientName(String name);
+    public IngredientDto getById(BigInteger id);
 }

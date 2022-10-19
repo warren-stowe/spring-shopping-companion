@@ -5,7 +5,9 @@ import com.spring.shoppingcompanion.dto.RecipeDto;
 import com.spring.shoppingcompanion.json.requests.AddRecipeRequest;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RecipeService {
@@ -22,6 +24,7 @@ public class RecipeService {
     public List<RecipeDto> findAll() {
         return recipeRepository.findAll();
     }
+    public Optional<RecipeDto> findById(BigInteger id) { return recipeRepository.findById(id); }
 
     public void addRecipeRequest(AddRecipeRequest request) {
 

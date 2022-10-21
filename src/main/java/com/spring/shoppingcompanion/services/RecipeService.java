@@ -14,11 +14,17 @@ public class RecipeService {
 
     private final RecipeRepository recipeRepository;
     private final IngredientService ingredientService;
+    private final RecipeIngredientService recipeIngredientService;
+    private final QuantityService quantityService;
 
     public RecipeService(RecipeRepository recipeRepository,
-                         IngredientService ingredientService) {
+                         IngredientService ingredientService,
+                         RecipeIngredientService recipeIngredientService,
+                         QuantityService quantityService) {
         this.recipeRepository = recipeRepository;
         this.ingredientService = ingredientService;
+        this.recipeIngredientService = recipeIngredientService;
+        this.quantityService = quantityService;
     }
 
     public List<RecipeDto> findAll() {
@@ -28,9 +34,12 @@ public class RecipeService {
 
     public void addRecipeRequest(AddRecipeRequest request) {
 
-        ingredientService.addRecipeIngredients(request);
-
         recipeRepository.save(request.getRecipe());
+        ingredientService.addRecipeIngredients(request);
+        recipeIngredientService.addRecipeIngredients(request);
+        quantityService.addRecipeQuantities(request);
+
+
     }
 
 }

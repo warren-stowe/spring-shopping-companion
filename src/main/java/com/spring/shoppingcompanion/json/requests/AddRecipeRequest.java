@@ -7,7 +7,7 @@ import java.util.List;
 public class AddRecipeRequest {
 
     private RecipeDto recipe;
-    private List<IngredientQuantities> ingredientQuantities;
+    private List<IngredientQuantity> ingredientQuantities;
 
     public RecipeDto getRecipe() {
         return recipe;
@@ -17,11 +17,11 @@ public class AddRecipeRequest {
         this.recipe = recipe;
     }
 
-    public List<IngredientQuantities> getIngredientQuantities() {
+    public List<IngredientQuantity> getIngredientQuantities() {
         return ingredientQuantities;
     }
 
-    public void setIngredientQuantities(List<IngredientQuantities> ingredientQuantities) {
+    public void setIngredientQuantities(List<IngredientQuantity> ingredientQuantities) {
         this.ingredientQuantities = ingredientQuantities;
     }
 }

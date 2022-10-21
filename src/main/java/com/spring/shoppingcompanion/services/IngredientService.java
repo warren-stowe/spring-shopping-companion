@@ -3,6 +3,7 @@ package com.spring.shoppingcompanion.services;
 import com.spring.shoppingcompanion.dao.IngredientRepository;
 import com.spring.shoppingcompanion.dto.IngredientDto;
 import com.spring.shoppingcompanion.json.requests.AddRecipeRequest;
+import com.spring.shoppingcompanion.json.requests.IngredientQuantity;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -23,6 +24,13 @@ public class IngredientService {
     }
 
     public List<IngredientDto> addRecipeIngredients(AddRecipeRequest request) {
+
+        for (IngredientQuantity ingredientQuantity : request.getIngredientQuantities()) {
+            if (ingredientQuantity.getIngredient().getId() == null) {
+                ingredientRepository.save(ingredientQuantity.getIngredient());
+            }
+        }
+
         return null;
     }
 

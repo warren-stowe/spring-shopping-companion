@@ -6,6 +6,9 @@ import com.spring.shoppingcompanion.json.requests.AddRecipeRequest;
 import com.spring.shoppingcompanion.json.requests.IngredientQuantity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class RecipeIngredientService {
 
@@ -15,12 +18,17 @@ public class RecipeIngredientService {
         this.recipeIngredientRepository = recipeIngredientRepository;
     }
 
-    public void addRecipeIngredients(AddRecipeRequest request) {
+    public List<RecipeIngredientDto> addRecipeIngredients(AddRecipeRequest request) {
+
+        List<RecipeIngredientDto> recipeIngredientDtos = new ArrayList<>();
 
         for (IngredientQuantity ingredientQuantity : request.getIngredientQuantities()) {
             RecipeIngredientDto recipeIngredientDto = recipeIngredientRepository.save(new RecipeIngredientDto(request.getRecipe().getId(),
                     ingredientQuantity.getIngredient().getId()));
-            ingredientQuantity.setId(recipeIngredientDto.getId());
+            ingredientQuantity.getQuantity().setRecipeIngredientId(recipeIngredientDto.getId());
+            recipeIngredientDtos.add(recipeIngredientDto);
         }
+
+        return recipeIngredientDtos;
     }
 }

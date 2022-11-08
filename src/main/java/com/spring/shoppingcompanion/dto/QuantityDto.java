@@ -1,6 +1,7 @@
 package com.spring.shoppingcompanion.dto;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 
 @Entity
 @Table(name = "quantities")
@@ -9,10 +10,10 @@ public class QuantityDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private BigInteger id;
 
     @Column(name = "recipeIngredientId")
-    private long recipeIngredientId;
+    private BigInteger recipeIngredientId;
     @Column(name = "amount")
     private double amount;
     @Column(name = "measurement")
@@ -22,7 +23,7 @@ public class QuantityDto {
 
     public QuantityDto() {}
 
-    public QuantityDto(long recipeIngredientId, double amount, String measurement,
+    public QuantityDto(BigInteger recipeIngredientId, double amount, String measurement,
                        boolean optional) {
         this.recipeIngredientId = recipeIngredientId;
         this.amount = amount;
@@ -40,19 +41,19 @@ public class QuantityDto {
                 '}';
     }
 
-    public long getId() {
+    public BigInteger getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(BigInteger id) {
         this.id = id;
     }
 
-    public long getRecipeIngredientId() {
+    public BigInteger getRecipeIngredientId() {
         return recipeIngredientId;
     }
 
-    public void setRecipeIngredientId(long recipeIngredientId) {
+    public void setRecipeIngredientId(BigInteger recipeIngredientId) {
         this.recipeIngredientId = recipeIngredientId;
     }
 

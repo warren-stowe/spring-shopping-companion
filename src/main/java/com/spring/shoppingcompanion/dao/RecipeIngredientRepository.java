@@ -1,6 +1,7 @@
 package com.spring.shoppingcompanion.dao;
 
 import com.spring.shoppingcompanion.dto.RecipeIngredientDto;
+import com.spring.shoppingcompanion.json.requests.IngredientQuantity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -14,6 +15,7 @@ import java.util.List;
 public interface RecipeIngredientRepository extends JpaRepository<RecipeIngredientDto, BigInteger>,
         JpaSpecificationExecutor<RecipeIngredientDto> {
 
-//    @Query("select id from recipes_ingredients where recipeId = :recipeId")
-//    public List<BigInteger> findAllIdsByRecipeId(@Param("recipeId") BigInteger recipeId);
+    @Query("select r from RecipeIngredientDto r where r.recipeId = 1")
+    public List<RecipeIngredientDto> findAllIdsByRecipeId(@Param("recipeId") BigInteger recipeId);
+
 }

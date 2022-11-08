@@ -1,7 +1,10 @@
 package com.spring.shoppingcompanion.services;
 
 import com.spring.shoppingcompanion.dao.RecipeRepository;
+import com.spring.shoppingcompanion.dto.IngredientDto;
+import com.spring.shoppingcompanion.dto.QuantityDto;
 import com.spring.shoppingcompanion.dto.RecipeDto;
+import com.spring.shoppingcompanion.dto.RecipeIngredientDto;
 import com.spring.shoppingcompanion.json.requests.AddRecipeRequest;
 import org.springframework.stereotype.Service;
 
@@ -34,10 +37,10 @@ public class RecipeService {
 
     public void addRecipeRequest(AddRecipeRequest request) {
 
-        recipeRepository.save(request.getRecipe());
-        ingredientService.addRecipeIngredients(request);
-        recipeIngredientService.addRecipeIngredients(request);
-        quantityService.addRecipeQuantities(request);
+        RecipeDto recipeDto = recipeRepository.save(request.getRecipe());
+        List<IngredientDto> ingredientDtos = ingredientService.addRecipeIngredients(request);
+        List<RecipeIngredientDto> recipeIngredientDtos = recipeIngredientService.addRecipeIngredients(request);
+        List<QuantityDto> quantityDtos = quantityService.addRecipeQuantities(request);
 
 
     }

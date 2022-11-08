@@ -7,17 +7,17 @@ import java.math.BigInteger;
 
 public class IngredientQuantity {
 
-    private BigInteger id;
     private IngredientDto ingredient;
     private QuantityDto quantity;
+
+    public IngredientQuantity(IngredientDto ingredientDto, QuantityDto quantityDto) {
+        ingredient = ingredientDto;
+        quantity = quantityDto;
+    }
 
     public IngredientDto getIngredient() {
         return ingredient;
     }
-
-    public BigInteger getId() { return id; }
-
-    public void setId(BigInteger id) { this.id = id; }
 
     public void setIngredient(IngredientDto ingredient) {
         this.ingredient = ingredient;

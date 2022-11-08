@@ -7,6 +7,7 @@ import com.spring.shoppingcompanion.json.requests.IngredientQuantity;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,13 +26,16 @@ public class IngredientService {
 
     public List<IngredientDto> addRecipeIngredients(AddRecipeRequest request) {
 
+        List<IngredientDto> ingredientDtos = new ArrayList<>();
+
         for (IngredientQuantity ingredientQuantity : request.getIngredientQuantities()) {
             if (ingredientQuantity.getIngredient().getId() == null) {
-                ingredientRepository.save(ingredientQuantity.getIngredient());
+                IngredientDto ingredientDto = ingredientRepository.save(ingredientQuantity.getIngredient());
+                ingredientDtos.add(ingredientDto);
             }
         }
 
-        return null;
+        return ingredientDtos;
     }
 
     public List<IngredientDto> findAll() {

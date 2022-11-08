@@ -1,9 +1,13 @@
 package com.spring.shoppingcompanion.services;
 
 import com.spring.shoppingcompanion.dao.QuantityRepository;
+import com.spring.shoppingcompanion.dto.QuantityDto;
 import com.spring.shoppingcompanion.json.requests.AddRecipeRequest;
 import com.spring.shoppingcompanion.json.requests.IngredientQuantity;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class QuantityService {
@@ -14,10 +18,15 @@ public class QuantityService {
         this.quantityRepository = quantityRepository;
     }
 
-    public void addRecipeQuantities(AddRecipeRequest request) {
+    public List<QuantityDto> addRecipeQuantities(AddRecipeRequest request) {
+
+        List<QuantityDto> quantityDtos = new ArrayList<>();
 
         for (IngredientQuantity ingredientQuantity : request.getIngredientQuantities()) {
-            quantityRepository.save(ingredientQuantity.getQuantity());
+            QuantityDto quantityDto = quantityRepository.save(ingredientQuantity.getQuantity());
+            quantityDtos.add(quantityDto);
         }
+
+        return quantityDtos;
     }
 }

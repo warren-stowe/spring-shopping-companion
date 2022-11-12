@@ -15,7 +15,7 @@ import java.util.List;
 public interface RecipeIngredientRepository extends JpaRepository<RecipeIngredientDto, BigInteger>,
         JpaSpecificationExecutor<RecipeIngredientDto> {
 
-    @Query("select r from RecipeIngredientDto r where r.recipeId = 1")
-    public List<RecipeIngredientDto> findAllIdsByRecipeId(@Param("recipeId") BigInteger recipeId);
+    @Query("select r from RecipeIngredientDto r where r.recipeId in :recipeIds")
+    public List<RecipeIngredientDto> findAllIdsByRecipeId(@Param("recipeIds") List<BigInteger> recipeIds);
 
 }

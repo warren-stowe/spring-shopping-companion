@@ -15,6 +15,7 @@ public class IngredientDto implements Serializable {
 
     @Column(name = "ingredientname")
     private String ingredientName;
+    
     @Column(name = "aisle")
     private String aisle;
 

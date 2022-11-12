@@ -15,14 +15,14 @@ public class RecipeDto implements Serializable {
     @Column(name = "id")
     private BigInteger id;
 
-    @Column(name = "recipename")
+    @Column(name = "recipeName")
     private String recipeName;
 
     @Column(name = "source")
     @Nullable
     private String source;
 
-    @Column(name = "sourcepage")
+    @Column(name = "sourcePage")
     private int sourcePage;
 
     @Column(name = "webpage")

@@ -31,11 +31,11 @@ public class ShoppingListService {
         this.quantityRepository = quantityRepository;
     }
 
-    public List<IngredientQuantity> getRecipeIngredients(BigInteger id) {
+    public List<IngredientQuantity> getRecipeIngredients(List<BigInteger> ids) {
 
         List<IngredientQuantity> ingredientQuantities = new ArrayList<>();
 
-        List<RecipeIngredientDto> recipeIngredientDtos = recipeIngredientRepository.findAllIdsByRecipeId(id);
+        List<RecipeIngredientDto> recipeIngredientDtos = recipeIngredientRepository.findAllIdsByRecipeId(ids);
 
         for (RecipeIngredientDto dto : recipeIngredientDtos) {
             Optional<IngredientDto> ingredientDto = ingredientRepository.findById(dto.getIngredientId());

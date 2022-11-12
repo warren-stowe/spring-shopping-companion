@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,6 +23,10 @@ public class ShoppingListController {
     @GetMapping("/recipe/{id}")
     public List<IngredientQuantity> getRecipeIngredients(BigInteger id) {
 
-        return shoppingListService.getRecipeIngredients(id);
+
+        List<BigInteger> ids = new ArrayList<>();
+        ids.add(new BigInteger(String.valueOf(0)));
+        ids.add(new BigInteger(String.valueOf(1)));
+        return shoppingListService.getRecipeIngredients(ids);
     }
 }

@@ -1,8 +1,10 @@
 package com.spring.shoppingcompanion.controllers;
 
 import com.spring.shoppingcompanion.json.requests.IngredientQuantity;
+import com.spring.shoppingcompanion.json.requests.RecipeListRequest;
 import com.spring.shoppingcompanion.services.ShoppingListService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,13 +22,9 @@ public class ShoppingListController {
         this.shoppingListService = shoppingListService;
     }
 
-    @GetMapping("/recipe/{id}")
-    public List<IngredientQuantity> getRecipeIngredients(BigInteger id) {
+    @GetMapping("/recipes")
+    public List<IngredientQuantity> getRecipeIngredients(@RequestBody RecipeListRequest request) {
 
-
-        List<BigInteger> ids = new ArrayList<>();
-        ids.add(new BigInteger(String.valueOf(0)));
-        ids.add(new BigInteger(String.valueOf(1)));
-        return shoppingListService.getRecipeIngredients(ids);
+        return shoppingListService.getRecipeIngredients(request);
     }
 }

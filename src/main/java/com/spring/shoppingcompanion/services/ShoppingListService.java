@@ -7,6 +7,7 @@ import com.spring.shoppingcompanion.dto.IngredientDto;
 import com.spring.shoppingcompanion.dto.QuantityDto;
 import com.spring.shoppingcompanion.dto.RecipeIngredientDto;
 import com.spring.shoppingcompanion.json.requests.IngredientQuantity;
+import com.spring.shoppingcompanion.json.requests.RecipeListRequest;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -43,6 +44,25 @@ public class ShoppingListService {
             if (ingredientDto.isPresent() && quantityDto.isPresent()) {
                 ingredientQuantities.add(new IngredientQuantity(ingredientDto.get(), quantityDto.get()));
             }
+        }
+
+        return ingredientQuantities;
+    }
+
+    public List<IngredientQuantity> getRecipeIngredients(RecipeListRequest request) {
+
+        List<IngredientQuantity> ingredientQuantities = new ArrayList<>();
+
+        List<RecipeIngredientDto> recipeIngredientDtos = recipeIngredientRepository
+                .findAllIdsByRecipeId(request.getRecipeIds());
+
+        for (RecipeIngredientDto dto : recipeIngredientDtos) {
+            Optional<IngredientDto> ingredientDto = ingredientRepository.findById(dto.getIngredientId());
+            Optional<QuantityDto> quantityDto = quantityRepository.findById(dto.getId());
+            if (ingredientDto.isPresent() && quantityDto.isPresent()) {
+                ingredientQuantities.add(new IngredientQuantity(ingredientDto.get(), quantityDto.get()));
+            }
+            // TODO: Handle failed IngredientQuantityDtos
         }
 
         return ingredientQuantities;

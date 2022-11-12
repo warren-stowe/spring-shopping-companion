@@ -8,12 +8,14 @@ import com.spring.shoppingcompanion.dto.QuantityDto;
 import com.spring.shoppingcompanion.dto.RecipeIngredientDto;
 import com.spring.shoppingcompanion.json.requests.IngredientQuantity;
 import com.spring.shoppingcompanion.json.requests.RecipeListRequest;
+import com.spring.shoppingcompanion.utilities.ShoppingListUtility;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ShoppingListService {
@@ -64,6 +66,9 @@ public class ShoppingListService {
             }
             // TODO: Handle failed IngredientQuantityDtos
         }
+
+        Set<IngredientQuantity> ingredientQuantitySet =
+                ShoppingListUtility.consolidateIngredientQuantities(ingredientQuantities);
 
         return ingredientQuantities;
     }

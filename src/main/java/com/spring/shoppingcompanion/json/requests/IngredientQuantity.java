@@ -30,4 +30,11 @@ public class IngredientQuantity {
     public void setQuantity(QuantityDto quantity) {
         this.quantity = quantity;
     }
+
+    public void addAmount(double amount) {
+
+        double currentAmount = quantity.getAmount();
+
+        quantity.setAmount(currentAmount + amount);
+    }
 }

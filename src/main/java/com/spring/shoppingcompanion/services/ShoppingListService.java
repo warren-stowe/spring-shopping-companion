@@ -8,9 +8,11 @@ import com.spring.shoppingcompanion.dto.QuantityDto;
 import com.spring.shoppingcompanion.dto.RecipeIngredientDto;
 import com.spring.shoppingcompanion.json.requests.IngredientQuantity;
 import com.spring.shoppingcompanion.json.requests.RecipeListRequest;
+import com.spring.shoppingcompanion.utilities.FileWriterUtility;
 import com.spring.shoppingcompanion.utilities.ShoppingListUtility;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +71,8 @@ public class ShoppingListService {
 
         Set<IngredientQuantity> ingredientQuantitySet =
                 ShoppingListUtility.consolidateIngredientQuantities(ingredientQuantities);
+
+        FileWriterUtility.writeShoppingListToFile(ShoppingListUtility.groupIngredientsByAisle(ingredientQuantitySet));
 
         return ingredientQuantities;
     }

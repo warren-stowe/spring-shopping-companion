@@ -25,4 +25,26 @@ public class ShoppingListUtility {
 
         return output.values().stream().collect(Collectors.toSet());
     }
+
+    public static Map<String, List<IngredientQuantity>> groupIngredientsByAisle(Set<IngredientQuantity> ingredients) {
+
+        Map<String, List<IngredientQuantity>> output = new HashMap<>();
+
+        for (IngredientQuantity ingredientQuantity : ingredients) {
+
+            String aisle = ingredientQuantity.getIngredient().getAisle();
+
+            if (output.containsKey(aisle)) {
+                output.get(aisle).add(ingredientQuantity);
+            } else {
+
+                List<IngredientQuantity> ingredientList = new ArrayList<>();
+                ingredientList.add(ingredientQuantity);
+
+                output.put(aisle, ingredientList);
+            }
+        }
+
+        return output;
+    }
 }

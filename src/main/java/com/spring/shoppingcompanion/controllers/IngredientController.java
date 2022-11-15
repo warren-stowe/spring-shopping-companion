@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("ingredients")
 public class IngredientController {
@@ -18,6 +19,8 @@ public class IngredientController {
 
     @GetMapping("/all")
     public List<IngredientDto> getAll() {
+
+        System.out.println("Call to Ingredients all");
         return ingredientService.findAll();
     }
 

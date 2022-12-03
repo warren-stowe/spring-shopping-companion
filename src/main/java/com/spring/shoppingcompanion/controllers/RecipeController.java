@@ -3,6 +3,8 @@ package com.spring.shoppingcompanion.controllers;
 import com.spring.shoppingcompanion.dto.RecipeDto;
 import com.spring.shoppingcompanion.json.requests.AddRecipeRequest;
 import com.spring.shoppingcompanion.services.RecipeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
@@ -15,6 +17,9 @@ import java.util.Optional;
 public class RecipeController {
 
     private RecipeService recipeService;
+
+    // TODO Implement Logging for all Controllers and Services
+    private static final Logger LOG = LoggerFactory.getLogger(RecipeController.class);
 
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;

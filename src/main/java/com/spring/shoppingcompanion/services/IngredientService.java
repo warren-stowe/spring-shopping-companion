@@ -42,8 +42,8 @@ public class IngredientService {
         return ingredientRepository.findAll();
     }
 
-    public IngredientDto findByIngredientName(String name) {
-        return ingredientRepository.findByIngredientName(name);
+    public List<IngredientDto> findByIngredientNameContainingIgnoreCase(String ingredientName) {
+        return ingredientRepository.findByIngredientNameContainingIgnoreCase(ingredientName);
     }
 
     public Optional<IngredientDto> findById(BigInteger id) {

@@ -29,9 +29,9 @@ public class IngredientController {
         return ingredientService.addIngredient(ingredientDto);
     }
 
-    @GetMapping("name")
-    public IngredientDto findByIngredientName(String name) {
-        return ingredientService.findByIngredientName(name);
+    @GetMapping("{ingredientName}")
+    public List<IngredientDto> findByIngredientName(@PathVariable String ingredientName) {
+        return ingredientService.findByIngredientNameContainingIgnoreCase(ingredientName);
     }
 
 //    @GetMapping("id")

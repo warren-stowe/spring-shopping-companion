@@ -29,9 +29,10 @@ public class IngredientService {
         List<IngredientDto> ingredientDtos = new ArrayList<>();
 
         for (IngredientQuantity ingredientQuantity : request.getIngredientQuantities()) {
-            if (ingredientQuantity.getIngredient().getId() == null) {
+            if (ingredientQuantity.getIngredient().getId() == null || ingredientQuantity.getIngredient().getId().intValue() <= 0) {
                 IngredientDto ingredientDto = ingredientRepository.save(ingredientQuantity.getIngredient());
                 ingredientDtos.add(ingredientDto);
+                ingredientQuantity.getIngredient().setId(ingredientDto.getId());
             }
         }
 

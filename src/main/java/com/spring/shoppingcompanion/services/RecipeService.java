@@ -38,6 +38,7 @@ public class RecipeService {
     public void addRecipeRequest(AddRecipeRequest request) {
 
         RecipeDto recipeDto = recipeRepository.save(request.getRecipe());
+        request.getRecipe().setId(recipeDto.getId());
         List<IngredientDto> ingredientDtos = ingredientService.addRecipeIngredients(request);
         List<RecipeIngredientDto> recipeIngredientDtos = recipeIngredientService.addRecipeIngredients(request);
         List<QuantityDto> quantityDtos = quantityService.addRecipeQuantities(request);

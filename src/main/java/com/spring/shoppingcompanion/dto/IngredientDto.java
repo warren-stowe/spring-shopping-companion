@@ -26,15 +26,6 @@ public class IngredientDto implements Serializable {
         this.aisle = aisle;
     }
 
-    @Override
-    public String toString() {
-        return "Ingredient{" +
-                "id=" + id +
-                ", ingredientName='" + ingredientName + '\'' +
-                ", aisle='" + aisle + '\'' +
-                '}';
-    }
-
     public BigInteger getId() {
         return id;
     }

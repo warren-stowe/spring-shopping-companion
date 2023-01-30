@@ -2,9 +2,12 @@ package com.spring.shoppingcompanion.services;
 
 import com.spring.shoppingcompanion.dao.IngredientRepository;
 import com.spring.shoppingcompanion.dto.IngredientDto;
+import com.spring.shoppingcompanion.exceptions.InvalidInputException;
 import com.spring.shoppingcompanion.json.requests.AddRecipeRequest;
 import com.spring.shoppingcompanion.json.requests.IngredientQuantity;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -21,6 +24,11 @@ public class IngredientService {
     }
 
     public IngredientDto addIngredient(IngredientDto ingredientDto) {
+
+        if (!ingredientDto.validate()) throw new InvalidInputException("Invalid input, Ingredient: "
+                + ingredientDto.getIngredientName() + ", Aisle: " + ingredientDto.getAisle(),
+                HttpStatus.BAD_REQUEST.value());
+
         return ingredientRepository.save(ingredientDto);
     }
 
@@ -44,7 +52,8 @@ public class IngredientService {
     }
 
     public List<IngredientDto> findByIngredientNameContainingIgnoreCase(String ingredientName) {
-        return ingredientRepository.findByIngredientNameContainingIgnoreCase(ingredientName);
+        List<IngredientDto> ingredientDtos = ingredientRepository.findByIngredientNameContainingIgnoreCase(ingredientName);
+        return ingredientDtos;
     }
 
     public Optional<IngredientDto> findById(BigInteger id) {

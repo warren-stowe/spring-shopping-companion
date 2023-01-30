@@ -2,6 +2,8 @@ package com.spring.shoppingcompanion.controllers;
 
 import com.spring.shoppingcompanion.dto.IngredientDto;
 import com.spring.shoppingcompanion.services.IngredientService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,8 +27,9 @@ public class IngredientController {
     }
 
     @PostMapping("/add")
-    public IngredientDto addIngredient(@RequestBody IngredientDto ingredientDto) {
-        return ingredientService.addIngredient(ingredientDto);
+    public ResponseEntity<IngredientDto> addIngredient(@RequestBody IngredientDto ingredientDto) {
+        ingredientService.addIngredient(ingredientDto);
+        return new ResponseEntity<>(ingredientDto, HttpStatus.CREATED);
     }
 
     @GetMapping("{ingredientName}")

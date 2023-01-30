@@ -20,9 +20,18 @@ public class ShoppingListController {
         this.shoppingListService = shoppingListService;
     }
 
-    @GetMapping("/recipes")
+    @PostMapping("/recipes")
     public List<IngredientQuantity> getRecipeIngredients(@RequestBody RecipeListRequest request) {
 
+        System.out.println("Get shopping list");
         return shoppingListService.getRecipeIngredients(request);
+    }
+
+    @GetMapping("/test")
+    public void test() {
+        System.out.println("test");
+        System.out.println("test");
+        System.out.println("test");
+        System.out.println("test");
     }
 }

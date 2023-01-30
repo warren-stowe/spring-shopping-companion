@@ -49,4 +49,17 @@ public class IngredientDto implements Serializable {
     public void setAisle(String aisle) {
         this.aisle = aisle;
     }
+
+    public boolean validate() {
+
+        if (this.ingredientName == null || this.ingredientName.length() == 0) {
+            return false;
+        }
+
+        if (this.aisle == null || this.aisle.length() == 0) {
+            return false;
+        }
+
+        return true;
+    }
 }

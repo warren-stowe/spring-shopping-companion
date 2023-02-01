@@ -35,10 +35,17 @@ public class RecipeController {
         return recipeService.findAll();
     }
 
+    @GetMapping("/search/{recipeName}")
+    public Optional<List<RecipeDto>> findByRecipeName(@PathVariable String recipeName) {
+        return recipeService.findByRecipeName(recipeName);
+    }
+
     @PostMapping("/add")
     public AddRecipeRequest addRecipe(@RequestBody AddRecipeRequest request) {
         recipeService.addRecipeRequest(request);
 
         return request;
     }
+
+
 }

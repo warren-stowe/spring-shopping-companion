@@ -23,19 +23,14 @@ public class RecipeDto implements Serializable {
     private String source;
 
     @Column(name = "sourcePage")
-    private int sourcePage;
-
-    @Column(name = "webpage")
-    @Nullable
-    private String webPage;
+    private String sourcePage;
 
     public RecipeDto() {}
 
-    public RecipeDto(String recipeName, String source, int sourcePage, String webpage) {
+    public RecipeDto(String recipeName, String source, String sourcePage) {
         this.recipeName = recipeName;
         this.source = source;
         this.sourcePage = sourcePage;
-        this.webPage = webpage;
     }
 
     @Override
@@ -45,7 +40,6 @@ public class RecipeDto implements Serializable {
                 ", recipeName='" + recipeName + '\'' +
                 ", source='" + source + '\'' +
                 ", sourcePage=" + sourcePage +
-                ", webPage='" + webPage + '\'' +
                 '}';
     }
 
@@ -73,19 +67,11 @@ public class RecipeDto implements Serializable {
         this.source = source;
     }
 
-    public int getSourcePage() {
+    public String getSourcePage() {
         return sourcePage;
     }
 
-    public void setSourcePage(int sourcePage) {
+    public void setSourcePage(String sourcePage) {
         this.sourcePage = sourcePage;
-    }
-
-    public String getWebPage() {
-        return webPage;
-    }
-
-    public void setWebPage(String webPage) {
-        this.webPage = webPage;
     }
 }

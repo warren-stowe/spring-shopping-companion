@@ -7,7 +7,6 @@ import com.spring.shoppingcompanion.json.requests.AddRecipeRequest;
 import com.spring.shoppingcompanion.json.requests.IngredientQuantity;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.math.BigInteger;
 import java.util.ArrayList;

@@ -47,5 +47,11 @@ public class RecipeController {
         return request;
     }
 
+    @GetMapping("/test")
+    public String test() {
+        System.out.println("Testing");
+        return "Test";
+    }
+
 
 }

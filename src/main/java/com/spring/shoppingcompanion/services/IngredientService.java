@@ -37,7 +37,7 @@ public class IngredientService {
 
         for (IngredientQuantity ingredientQuantity : request.getIngredientQuantities()) {
             if (ingredientQuantity.getIngredient().getId() == null || ingredientQuantity.getIngredient().getId().intValue() <= 0) {
-                IngredientDto ingredientDto = ingredientRepository.save(ingredientQuantity.getIngredient());
+                IngredientDto ingredientDto = addIngredient(ingredientQuantity.getIngredient());
                 ingredientDtos.add(ingredientDto);
                 ingredientQuantity.getIngredient().setId(ingredientDto.getId());
             }

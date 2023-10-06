@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("ingredients")
 public class IngredientController {
 
-    private IngredientService ingredientService;
+    private final IngredientService ingredientService;
 
     public IngredientController(IngredientService ingredientService) {
         this.ingredientService = ingredientService;
@@ -22,7 +22,6 @@ public class IngredientController {
     @GetMapping("/all")
     public List<IngredientDto> getAll() {
 
-        System.out.println("Call to Ingredients all");
         return ingredientService.findAll();
     }
 
@@ -36,10 +35,4 @@ public class IngredientController {
     public List<IngredientDto> findByIngredientName(@PathVariable String ingredientName) {
         return ingredientService.findByIngredientNameContainingIgnoreCase(ingredientName);
     }
-
-//    @GetMapping("id")
-//    public Optional<IngredientDto> findById() {
-//        return ingredientService.findById(new BigInteger("3"));
-//    }
-
 }

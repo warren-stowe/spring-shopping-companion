@@ -26,12 +26,4 @@ public class ShoppingListController {
         System.out.println("Get shopping list");
         return shoppingListService.getRecipeIngredients(request);
     }
-
-    @GetMapping("/test")
-    public void test() {
-        System.out.println("test");
-        System.out.println("test");
-        System.out.println("test");
-        System.out.println("test");
-    }
 }

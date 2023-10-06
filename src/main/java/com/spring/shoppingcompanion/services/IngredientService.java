@@ -31,6 +31,13 @@ public class IngredientService {
         return ingredientRepository.save(ingredientDto);
     }
 
+    /**
+     * Given an AddRecipeRequest, loop through all the IngredientQuantities objects.  If the Id is null
+     * or less than 1, then it is an ingredient not currently in the database.  Add the ingredient to the
+     * database and then set the IngredientQuantity Id to the new database Id.
+     * @param request A new recipe to be added to the database
+     * @return A List of all Ingredients in the request
+     */
     public List<IngredientDto> addRecipeIngredients(AddRecipeRequest request) {
 
         List<IngredientDto> ingredientDtos = new ArrayList<>();
@@ -51,8 +58,7 @@ public class IngredientService {
     }
 
     public List<IngredientDto> findByIngredientNameContainingIgnoreCase(String ingredientName) {
-        List<IngredientDto> ingredientDtos = ingredientRepository.findByIngredientNameContainingIgnoreCase(ingredientName);
-        return ingredientDtos;
+        return ingredientRepository.findByIngredientNameContainingIgnoreCase(ingredientName);
     }
 
     public Optional<IngredientDto> findById(BigInteger id) {

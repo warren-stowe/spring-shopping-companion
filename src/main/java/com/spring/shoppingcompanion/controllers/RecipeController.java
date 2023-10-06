@@ -16,7 +16,7 @@ import java.util.Optional;
 @RequestMapping("recipes")
 public class RecipeController {
 
-    private RecipeService recipeService;
+    private final RecipeService recipeService;
 
     // TODO Implement Logging for all Controllers and Services
     private static final Logger LOG = LoggerFactory.getLogger(RecipeController.class);
@@ -47,11 +47,8 @@ public class RecipeController {
         return request;
     }
 
-    @GetMapping("/test")
-    public String test() {
-        System.out.println("Testing");
-        return "Test";
+    @GetMapping("/health")
+    public String healthCheck() {
+        return "System Available";
     }
-
-
 }

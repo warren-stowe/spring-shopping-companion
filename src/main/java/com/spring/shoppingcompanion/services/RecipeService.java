@@ -5,6 +5,7 @@ import com.spring.shoppingcompanion.dto.IngredientDto;
 import com.spring.shoppingcompanion.dto.QuantityDto;
 import com.spring.shoppingcompanion.dto.RecipeDto;
 import com.spring.shoppingcompanion.dto.RecipeIngredientDto;
+import com.spring.shoppingcompanion.exceptions.InvalidInputException;
 import com.spring.shoppingcompanion.json.requests.AddRecipeRequest;
 import org.springframework.stereotype.Service;
 
@@ -40,11 +41,17 @@ public class RecipeService {
 
     public void addRecipeRequest(AddRecipeRequest request) {
 
-        RecipeDto recipeDto = recipeRepository.save(request.getRecipe());
-        request.getRecipe().setId(recipeDto.getId());
-        List<IngredientDto> ingredientDtos = ingredientService.addRecipeIngredients(request);
-        List<RecipeIngredientDto> recipeIngredientDtos = recipeIngredientService.addRecipeIngredients(request);
-        List<QuantityDto> quantityDtos = quantityService.addRecipeQuantities(request);
+        try {
+            List<IngredientDto> ingredientDtos = ingredientService.addRecipeIngredients(request);
+            RecipeDto recipeDto = recipeRepository.save(request.getRecipe());
+            request.getRecipe().setId(recipeDto.getId());
+            List<RecipeIngredientDto> recipeIngredientDtos = recipeIngredientService.addRecipeIngredients(request);
+            List<QuantityDto> quantityDtos = quantityService.addRecipeQuantities(request);
+            System.out.println("Recipe " + request.getRecipe().getRecipeName() + " successfully submitted.");
+        } catch (InvalidInputException ex) {
+            System.out.println("InvalidInputException: " + ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("Generic Exception encountered: " + ex.getMessage());
+        }
     }
-
 }

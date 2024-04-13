@@ -26,7 +26,6 @@ public class RecipeIngredientService {
             RecipeIngredientDto recipeIngredientDto = recipeIngredientRepository.save(new RecipeIngredientDto(request.getRecipe().getId(),
                     ingredientQuantity.getIngredient().getId()));
 
-//            ingredientQuantity.getQuantity().setRecipeIngredientId(recipeIngredientDto.getId());
             recipeIngredientDtos.add(recipeIngredientDto);
             ingredientQuantity.getQuantity().setRecipeIngredientId(recipeIngredientDto.getId());
         }

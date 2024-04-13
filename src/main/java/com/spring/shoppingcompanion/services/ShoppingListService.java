@@ -62,7 +62,7 @@ public class ShoppingListService {
 
         for (RecipeIngredientDto dto : recipeIngredientDtos) {
             Optional<IngredientDto> ingredientDto = ingredientRepository.findById(dto.getIngredientId());
-            Optional<QuantityDto> quantityDto = quantityRepository.findById(dto.getId());
+            Optional<QuantityDto> quantityDto = quantityRepository.findByRecipeIngredientId(dto.getId());
             if (ingredientDto.isPresent() && quantityDto.isPresent()) {
                 ingredientQuantities.add(new IngredientQuantity(ingredientDto.get(), quantityDto.get()));
             }

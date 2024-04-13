@@ -33,6 +33,13 @@ public class RecipeDto implements Serializable {
         this.sourcePage = sourcePage;
     }
 
+    public RecipeDto(BigInteger id, String recipeName, String source, String sourcePage) {
+        this.id = id;
+        this.recipeName = recipeName;
+        this.source = source;
+        this.sourcePage = sourcePage;
+    }
+
     @Override
     public String toString() {
         return "RecipeDto{" +

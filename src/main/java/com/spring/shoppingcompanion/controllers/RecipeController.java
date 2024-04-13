@@ -11,7 +11,7 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("recipes")
 public class RecipeController {
@@ -46,12 +46,4 @@ public class RecipeController {
 
         return request;
     }
-
-    @GetMapping("/test")
-    public String test() {
-        System.out.println("Testing");
-        return "Test";
-    }
-
-
 }

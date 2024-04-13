@@ -28,6 +28,7 @@ public class RecipeIngredientService {
 
 //            ingredientQuantity.getQuantity().setRecipeIngredientId(recipeIngredientDto.getId());
             recipeIngredientDtos.add(recipeIngredientDto);
+            ingredientQuantity.getQuantity().setRecipeIngredientId(recipeIngredientDto.getId());
         }
 
         return recipeIngredientDtos;

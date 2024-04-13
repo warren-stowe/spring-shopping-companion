@@ -9,7 +9,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("list")
 public class ShoppingListController {
@@ -25,13 +25,5 @@ public class ShoppingListController {
 
         System.out.println("Get shopping list");
         return shoppingListService.getRecipeIngredients(request);
-    }
-
-    @GetMapping("/test")
-    public void test() {
-        System.out.println("test");
-        System.out.println("test");
-        System.out.println("test");
-        System.out.println("test");
     }
 }

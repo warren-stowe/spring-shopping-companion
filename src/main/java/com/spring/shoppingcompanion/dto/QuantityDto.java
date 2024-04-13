@@ -76,5 +76,4 @@ public class QuantityDto {
     public void setOptional(boolean optional) { this.optional = optional; }
 
     public boolean getOptional() { return optional; }
-
 }

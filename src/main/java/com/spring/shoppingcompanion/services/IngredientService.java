@@ -22,6 +22,11 @@ public class IngredientService {
         this.ingredientRepository = ingredientRepository;
     }
 
+    /**
+     *
+     * @param ingredientDto
+     * @return
+     */
     public IngredientDto addIngredient(IngredientDto ingredientDto) {
 
         if (!ingredientDto.validate()) throw new InvalidInputException("Invalid input, Ingredient: "
@@ -31,6 +36,11 @@ public class IngredientService {
         return ingredientRepository.save(ingredientDto);
     }
 
+    /**
+     *
+     * @param request
+     * @return
+     */
     public List<IngredientDto> addRecipeIngredients(AddRecipeRequest request) {
 
         List<IngredientDto> ingredientDtos = new ArrayList<>();
@@ -46,6 +56,10 @@ public class IngredientService {
         return ingredientDtos;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<IngredientDto> findAll() {
         return ingredientRepository.findAll();
     }

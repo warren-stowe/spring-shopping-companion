@@ -24,6 +24,7 @@ public class ShoppingListController {
     public List<IngredientQuantity> getRecipeIngredients(@RequestBody RecipeListRequest request) {
 
         System.out.println("Get shopping list");
-        return shoppingListService.getRecipeIngredients(request);
+        List<IngredientQuantity> response = shoppingListService.getRecipeIngredients(request);
+        return response;
     }
 }

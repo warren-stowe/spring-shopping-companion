@@ -17,9 +17,9 @@ public class FileWriterUtility {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (String aisle : ingredients.keySet()) {
-            stringBuilder.append("------------------------------");
+            stringBuilder.append("------");
             stringBuilder.append(aisle);
-            stringBuilder.append("------------------------------");
+            stringBuilder.append("------");
             stringBuilder.append(System.getProperty("line.separator"));
 
             for (IngredientQuantity ingredientQuantity : ingredients.get(aisle)) {

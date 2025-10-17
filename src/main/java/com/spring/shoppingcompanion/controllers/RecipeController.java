@@ -36,8 +36,8 @@ public class RecipeController {
     }
 
     @GetMapping("/search/{recipeName}")
-    public Optional<List<RecipeDto>> findByRecipeName(@PathVariable String recipeName) {
-        Optional<List<RecipeDto>> response = recipeService.findByRecipeName(recipeName);
+    public List<RecipeDto> findByRecipeName(@PathVariable String recipeName) {
+        List<RecipeDto> response = recipeService.findByRecipeName(recipeName);
         return response;
     }
 

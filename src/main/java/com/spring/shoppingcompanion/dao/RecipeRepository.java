@@ -13,6 +13,6 @@ import java.util.Optional;
 public interface RecipeRepository extends JpaRepository<RecipeDto, BigInteger>,
         JpaSpecificationExecutor<RecipeDto> {
 
-    public Optional<List<RecipeDto>> findByRecipeNameContainingIgnoreCase(String recipeName);
+    public List<RecipeDto> findByRecipeNameContainingIgnoreCase(String recipeName);
 
 }

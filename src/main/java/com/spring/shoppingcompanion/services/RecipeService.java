@@ -35,7 +35,7 @@ public class RecipeService {
         return recipeRepository.findAll();
     }
     public Optional<RecipeDto> findById(BigInteger id) { return recipeRepository.findById(id); }
-    public Optional<List<RecipeDto>> findByRecipeName(String recipeName) {
+    public List<RecipeDto> findByRecipeName(String recipeName) {
         return recipeRepository.findByRecipeNameContainingIgnoreCase(recipeName);
     }
 

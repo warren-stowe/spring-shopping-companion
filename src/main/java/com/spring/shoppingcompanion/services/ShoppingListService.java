@@ -5,6 +5,7 @@ import com.spring.shoppingcompanion.dao.QuantityRepository;
 import com.spring.shoppingcompanion.dao.RecipeIngredientRepository;
 import com.spring.shoppingcompanion.dto.IngredientDto;
 import com.spring.shoppingcompanion.dto.QuantityDto;
+import com.spring.shoppingcompanion.dto.RecipeDto;
 import com.spring.shoppingcompanion.dto.RecipeIngredientDto;
 import com.spring.shoppingcompanion.json.requests.IngredientQuantity;
 import com.spring.shoppingcompanion.json.requests.RecipeListRequest;
@@ -12,7 +13,6 @@ import com.spring.shoppingcompanion.utilities.FileWriterUtility;
 import com.spring.shoppingcompanion.utilities.ShoppingListUtility;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +28,16 @@ public class ShoppingListService {
 
     private final QuantityRepository quantityRepository;
 
+    private final RecipeService recipeService;
+
     public ShoppingListService(RecipeIngredientRepository recipeIngredientRepository,
                                IngredientRepository ingredientRepository,
-                               QuantityRepository quantityRepository) {
+                               QuantityRepository quantityRepository,
+                               RecipeService recipeService) {
         this.recipeIngredientRepository = recipeIngredientRepository;
         this.ingredientRepository = ingredientRepository;
         this.quantityRepository = quantityRepository;
+        this.recipeService = recipeService;
     }
 
     public List<IngredientQuantity> getRecipeIngredients(List<BigInteger> ids) {
@@ -72,8 +76,23 @@ public class ShoppingListService {
         Set<IngredientQuantity> ingredientQuantitySet =
                 ShoppingListUtility.consolidateIngredientQuantities(ingredientQuantities);
 
-        FileWriterUtility.writeShoppingListToFile(ShoppingListUtility.groupIngredientsByAisle(ingredientQuantitySet));
+        List<RecipeDto> recipes = getAllRecipes(request.getRecipeIds());
+
+        FileWriterUtility.writeShoppingListToFile(ShoppingListUtility.groupIngredientsByAisle(ingredientQuantitySet), recipes);
 
         return ingredientQuantities;
+    }
+
+    private List<RecipeDto> getAllRecipes(List<BigInteger> recipeIds) {
+        List<RecipeDto> recipes = new ArrayList<>();
+
+        for (BigInteger recipeId : recipeIds) {
+            Optional<RecipeDto> recipe = recipeService.findById(recipeId);
+            if (recipe.isPresent()) {
+                recipes.add(recipe.get());
+            }
+        }
+
+        return recipes;
     }
 }

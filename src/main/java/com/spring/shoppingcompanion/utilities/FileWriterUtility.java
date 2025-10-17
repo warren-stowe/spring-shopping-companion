@@ -1,20 +1,28 @@
 package com.spring.shoppingcompanion.utilities;
 
+import com.spring.shoppingcompanion.dto.RecipeDto;
 import com.spring.shoppingcompanion.json.requests.IngredientQuantity;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
 public class FileWriterUtility {
 
-    public static void writeShoppingListToFile(Map<String, List<IngredientQuantity>> ingredients) {
+    public static void writeShoppingListToFile(Map<String, List<IngredientQuantity>> ingredients, List<RecipeDto> recipes) {
 
         StringBuilder stringBuilder = new StringBuilder();
+
+        for (RecipeDto recipe : recipes) {
+            stringBuilder.append(recipe.getRecipeName());
+            stringBuilder.append(System.getProperty("line.separator"));
+            stringBuilder.append(recipe.getSource() + ": " + recipe.getSourcePage());
+            stringBuilder.append(System.getProperty("line.separator"));
+            stringBuilder.append(System.getProperty("line.separator"));
+        }
+
+        stringBuilder.append(System.getProperty("line.separator"));
 
         for (String aisle : ingredients.keySet()) {
             stringBuilder.append("------");
@@ -35,9 +43,6 @@ public class FileWriterUtility {
         }
 
         try {
-
-//            BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/lists/shopping-list-" + LocalDateTime.now()));
-
             String root = "src/main/resources/lists/shopping-list-";
             String date = LocalDateTime.now().toString().replace(":", "-");
 

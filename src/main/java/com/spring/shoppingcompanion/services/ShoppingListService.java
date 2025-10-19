@@ -14,10 +14,7 @@ import com.spring.shoppingcompanion.utilities.ShoppingListUtility;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class ShoppingListService {
@@ -40,23 +37,6 @@ public class ShoppingListService {
         this.recipeService = recipeService;
     }
 
-    public List<IngredientQuantity> getRecipeIngredients(List<BigInteger> ids) {
-
-        List<IngredientQuantity> ingredientQuantities = new ArrayList<>();
-
-        List<RecipeIngredientDto> recipeIngredientDtos = recipeIngredientRepository.findAllIdsByRecipeId(ids);
-
-        for (RecipeIngredientDto dto : recipeIngredientDtos) {
-            Optional<IngredientDto> ingredientDto = ingredientRepository.findById(dto.getIngredientId());
-            Optional<QuantityDto> quantityDto = quantityRepository.findById(dto.getId());
-            if (ingredientDto.isPresent() && quantityDto.isPresent()) {
-                ingredientQuantities.add(new IngredientQuantity(ingredientDto.get(), quantityDto.get()));
-            }
-        }
-
-        return ingredientQuantities;
-    }
-
     public List<IngredientQuantity> getRecipeIngredients(RecipeListRequest request) {
 
         List<IngredientQuantity> ingredientQuantities = new ArrayList<>();
@@ -73,12 +53,12 @@ public class ShoppingListService {
             // TODO: Handle failed IngredientQuantityDtos
         }
 
-        Set<IngredientQuantity> ingredientQuantitySet =
+        Map<BigInteger, List<IngredientQuantity>> ingredientQuantityMap =
                 ShoppingListUtility.consolidateIngredientQuantities(ingredientQuantities);
 
         List<RecipeDto> recipes = getAllRecipes(request.getRecipeIds());
 
-        FileWriterUtility.writeShoppingListToFile(ShoppingListUtility.groupIngredientsByAisle(ingredientQuantitySet), recipes);
+        FileWriterUtility.writeShoppingListToFile(ShoppingListUtility.groupIngredientsByAisle(ingredientQuantityMap), recipes);
 
         return ingredientQuantities;
     }

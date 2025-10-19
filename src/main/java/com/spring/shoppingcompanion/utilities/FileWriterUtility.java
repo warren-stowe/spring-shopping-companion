@@ -25,18 +25,28 @@ public class FileWriterUtility {
         stringBuilder.append(System.getProperty("line.separator"));
 
         for (String aisle : ingredients.keySet()) {
+            stringBuilder.append(System.getProperty("line.separator"));
             stringBuilder.append("------");
             stringBuilder.append(aisle);
             stringBuilder.append("------");
-            stringBuilder.append(System.getProperty("line.separator"));
 
+            String previousIngredient = "";
             for (IngredientQuantity ingredientQuantity : ingredients.get(aisle)) {
-                stringBuilder.append(ingredientQuantity.getIngredient().getIngredientName());
-                stringBuilder.append(": ");
-                stringBuilder.append(ingredientQuantity.getQuantity().getAmount());
-                stringBuilder.append(" ");
-                stringBuilder.append(ingredientQuantity.getQuantity().getMeasurement());
-                stringBuilder.append(System.getProperty("line.separator"));
+                if (ingredientQuantity.getIngredient().getIngredientName().equals(previousIngredient)) {
+                    stringBuilder.append(", ");
+                    stringBuilder.append(ingredientQuantity.getQuantity().getAmount());
+                    stringBuilder.append(" ");
+                    stringBuilder.append(ingredientQuantity.getQuantity().getMeasurement());
+                } else {
+                    stringBuilder.append(System.getProperty("line.separator"));
+                    stringBuilder.append(ingredientQuantity.getIngredient().getIngredientName());
+                    stringBuilder.append(": ");
+                    stringBuilder.append(ingredientQuantity.getQuantity().getAmount());
+                    stringBuilder.append(" ");
+                    stringBuilder.append(ingredientQuantity.getQuantity().getMeasurement());
+                }
+
+                previousIngredient = ingredientQuantity.getIngredient().getIngredientName();
             }
 
             stringBuilder.append(System.getProperty("line.separator"));

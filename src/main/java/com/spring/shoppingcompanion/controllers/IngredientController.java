@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000"})
 @RestController
 @RequestMapping("ingredients")
 public class IngredientController {
@@ -26,7 +26,14 @@ public class IngredientController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<IngredientDto> addIngredient(@RequestBody IngredientDto ingredientDto) {
+    public ResponseEntity<IngredientDto> addIngredient(@RequestBody IngredientDto ingredientDto) throws Exception {
+
+        List<IngredientDto> matchingIngredients = findByIngredientName(ingredientDto.getIngredientName());
+
+        if (matchingIngredients.size() > 0) {
+            throw new Exception();
+        }
+
         ingredientService.addIngredient(ingredientDto);
         return new ResponseEntity<>(ingredientDto, HttpStatus.CREATED);
     }
